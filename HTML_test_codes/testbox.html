@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator-style Input</title>
+    <style>
+        input[type="text"] {
+            text-align: right; /* Aligns the text to the right */
+            direction: rtl;   /* Sets overall text direction as right-to-left */
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <label for="calcInput">Enter numbers:</label>
+        <input type="text" id="calcInput" name="calcInput" readonly>
+    </form>
+
+    <script>
+        const calcInput = document.getElementById('calcInput');
+
+        document.addEventListener('keydown', (event) => {
+            const key = event.key;
+
+            // Allow only numbers and basic calculator operations
+            if (!isNaN(key) || ['+', '-', '*', '/'].includes(key)) {
+                calcInput.value += key; // Append the key pressed
+            } else if (key === 'Backspace') {
+                calcInput.value = calcInput.value.slice(0, -1); // Remove the last character
+            }
+
+            // Prevent default behavior for unsupported keys
+            event.preventDefault();
+        });
+    </script>
+</body>
+</html>

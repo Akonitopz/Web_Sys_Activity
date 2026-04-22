@@ -1,0 +1,159 @@
+.content-wrapper{
+  display: flex;
+
+}
+
+.content-left{
+  position: relative;
+  width: 415px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 42px 42px 42px 42px;
+}
+
+.content-right{
+  flex: 1;
+  background-color: #001624;
+}
+
+.content-right img{
+  height: 580px;
+  width: 100%;
+}
+
+.header-logo-wrapper{
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.header-logo-wrapper img{
+  width: 400px;
+}
+
+.content-left input{
+  width: 358px;
+  padding: 7px 14px 7px 28px;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 2px solid rgba(120, 130, 140, 0.35);
+}
+
+.content-left input::placeholder{
+  font-size: 16px;
+  color: rgb(73, 80, 87);
+}
+
+.password, .username{
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password input, .username input{
+  font-size: 16px;
+  margin-bottom: 14px;
+  color: rgb(73, 80, 87);
+}
+
+.password::before{
+    content: "\f023";
+    font-family: "Font Awesome 6 Free";
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    font-weight: 900;
+    font-size: 16px;
+    color: #fab417;
+    pointer-events: none;
+}
+
+.username::before{
+    content: "\f007";
+    font-family: "Font Awesome 6 Free";
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    font-weight: 900;
+    font-size: 16px;
+    color: #fab417;
+    pointer-events: none;
+}
+
+.login-button{
+  width: 170px;
+  margin: 6px 6px 6px 6px;
+  padding: 11px 0px 11px 0px;
+  background-color: #fab417;
+  text-align: center;
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+.login-button button{
+  background-color: #fab417;
+  color: white;
+  border: none;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.divider-1{
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.divider-1 hr{
+  width: 100%;
+}
+
+.login-add-info{
+  width: 100%;
+  margin-bottom: 7px;
+}
+
+.login-add-info h2{
+  font-size: 16px;
+  color: #fab417;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.access-button{
+  width: 170px;
+  margin: 6px 6px 6px 6px;
+  padding: 11px 0px 11px 0px;
+  background-color: #201B50;
+  text-align: center;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+
+.access-button button{
+  background-color: #201B50;
+  color: white;
+  border: none;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.footer-button{
+  text-align: center;
+  background-color: white;
+}
+
+.footer-button button{
+  background-color: white;
+  color: #fab417;
+  border: none;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 6px 6px 6px 6px;
+  padding: 0;
+}
+

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+
+      <style>
+        .subscribe-button{
+          background-color: red;
+          border: none;
+          border-radius: 1px;
+          color: white;
+          height: 30px;
+          width: 100px;
+          margin-right: 10px;
+          cursor: pointer;
+          transition: opacity 0.15s;}
+        
+        .subscribe-button:hover{
+          opacity: 0.8;
+        }
+        .subscribe-button:active{
+          opacity: 0.5;
+        }
+
+        .join-button{
+          background-color: white;
+          color: rgb(44, 156, 231);
+          border-width: 1px;
+          border-color: rgb(44, 156, 231);
+          border-style: solid;
+          height: 30px;
+          width: 50px;
+          margin-right: 7px;
+          cursor: pointer;
+          transition: background-color 0.15s, opacity 2s, text-decoration 0.15s;}
+        
+        .join-button:hover{
+            background-color: rgb(44, 156, 231);
+            color: white;
+          }
+
+        .join-button:active{
+          opacity: 0.5;
+          text-decoration: underline;
+        }
+        
+        .tweet-button{
+          background-color: rgb(44, 156, 231);
+          color: white;
+          font-weight: bold;
+          border-width: 1px;
+          border: none;
+          border-radius: 20px;
+          height: 30px;
+          width: 70px;
+          cursor: pointer;
+          transition: box-shadow 0.15s, background-color 0.15s, color 0.15s;}
+
+        .tweet-button:hover{
+          box-shadow: 7px 5px 10px rgba(0, 0, 0, 0.15);
+          
+        }
+        .tweet-button:active{
+          background-color: white;
+          color: rgb(44, 156, 231);
+        }
+
+        /* Style the button that is used to open and close the collapsible content */
+        .collapsible {
+          background-color: #eee;
+          color: #444;
+          cursor: pointer;
+          padding: 18px;
+          width: 100%;
+          border: none;
+          text-align: left;
+          outline: none;
+          font-size: 15px;
+        }
+
+        /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+        .active, .collapsible:hover {
+          background-color: #ccc;
+        }
+
+        /* Style the collapsible content. Note: hidden by default */
+        .content {
+          padding: 0 18px;
+          display: none;
+          overflow: hidden;
+          background-color: #f1f1f1;
+        }
+
+      </style>
+    </head>
+    <body>
+        <button class="subscribe-button">SUBCRIBE</button>
+
+        <button class="join-button">JOIN</button>
+
+        <button class="tweet-button">TWEET</button>
+
+        <button type="button" class="collapsible">Open Collapsible</button>
+        <div class="content">
+          <p>Lorem ipsum...</p>
+        </div>
+    </body>
+
+    <script>
+     var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+        } 
+    </script>
+</html>

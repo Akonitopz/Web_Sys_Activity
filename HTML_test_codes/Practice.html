@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Practice Webpage</title>
+    <style></style>
+  </head>
+  <body>
+    <div><h1>Practice webpage</h1> 
+    <div>
+      <input type="text" class="inputBox" placeholder="Input text here.....">
+
+      <button class="input-Button" onclick="submit()     
+      ">submit</button>
+
+      </div>
+      <div class="output-div"></div>
+    </div>
+    
+    <script>
+     data = JSON.parse(localStorage.getItem('data')) || [{
+      user_input: ''
+     }];
+
+      let inputHTML = '';
+      
+      function submit(){
+        inputName = document.querySelector('.inputBox').value;
+        
+        data.push({
+          user_input: inputName
+        });
+        renderArr();
+
+        
+      }
+
+      function renderArr(){
+        for(let i = 0; i < data.length; i++){
+          const todoName = data[i];
+          const html = `
+            <div>
+            ${todoName}  
+            </div>
+            <div>
+              <button onclick"data.splice(${i}, 1); renderArr();">Delete</button>
+            </div>`;}
+
+        document.querySelector('.output-div').innerHTML += html
+        localStorage.setItem('data', JSON.stringify(data));
+        
+      }
+    </script>
+  </body>
+</html>

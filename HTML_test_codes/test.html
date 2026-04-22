@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="test.css">
+</head>
+<body>
+  <div class="slider-container">
+  <div class="slider">
+    <img src="images/image_1.jpg" class="slide active" />
+    <img src="images/image_2.jpg" class="slide" />
+  </div>
+  <button class="nav left" onclick="changeSlide(-1)">&#10094;</button>
+  <button class="nav right" onclick="changeSlide(1)">&#10095;</button>
+</div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (i === index) slide.classList.add('active');
+    });
+  }
+
+  function changeSlide(direction) {
+    currentSlide += direction;
+    if (currentSlide < 0) currentSlide = slides.length - 1;
+    if (currentSlide >= slides.length) currentSlide = 0;
+    showSlide(currentSlide);
+  }
+</script>
+</body>
+</html>

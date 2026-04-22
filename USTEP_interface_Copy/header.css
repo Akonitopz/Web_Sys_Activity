@@ -1,0 +1,142 @@
+.socials{
+  padding: 7px 15px 7px 35px;}
+
+.socials-row{
+  display: flex;
+  margin-left: 15px;
+  margin-right: 15px;}
+
+.social-links{
+  flex: 1;
+  padding: 0px 15px 0px 15px;}
+  
+.social-icons{
+  flex: 1;
+  padding: 0px 50px 0px 50px;
+  justify-content: end;}
+
+.links{
+  width: 100%;}
+
+.links img{
+  width: 40px;}
+
+.links, .social-icons{
+  display: flex;
+  align-items: center;}
+
+.links p{
+  font-size: 14px;
+  color: white;
+  margin-right: 25px;}
+
+.social-icons img{
+  width: 30px;
+  margin-left: 11px;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  border-width: 3px 3px 3px;}
+
+.img-1{
+  background-color: #3A5999;}
+
+.img-2{
+  background-color: #d31f6d;}
+
+.img-3{
+  background-color: #FE0000;}
+/*--------------------Top Header--------------------*/
+
+.header-logo{
+  border-top-style: solid;
+  border-top-color: rgb(249, 191, 59);
+  border-top-width: 2px;
+  padding: 20px 15px 20px 15px;
+  background-color: white;
+  position: absolute;
+  left: 61px;
+  top: 52px;
+  right: 61px;
+  height: 111px;
+  }
+
+.header-logo-row{
+  display: flex;
+  }
+
+.header-logo-image, .header-logo-info{
+  flex: 1;
+  padding: 0px 15px 0px 15px;}
+
+.header-logo-image img{
+  height: 90px;}
+
+.header-logo-info{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.header-logo-info p{
+  padding: 10px 6px 10px 6px;
+  font-weight: 700;
+  color: #FAB418;}
+
+.notifications-icon-image, .messages-icon-image{
+  width: 50px;}
+
+.profile-image{
+  width: 80px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(135, 131, 131);
+  border-radius: 40px;}
+
+/*------------------Lower Header----------------*/
+
+.lower-header{
+  background-color: white;
+  position: absolute;
+  left: 61px;
+  top: 203px;
+  right: 61px;
+  height: 60px;
+  padding: 0px 15px 0px 15px;
+}
+
+.nav-bar{
+  display: flex;
+  background-color: #1F1B4F;
+  padding: 0px 8px 0px 8px;
+  color: white;
+  height: 60px;
+  border-radius: 3px;
+  align-items: center;
+}
+
+.menu-div, .search-icon-div{
+  flex: 1;
+  display: flex;
+  align-items: center;}
+
+.menu-div img{
+  height: 40px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  overflow: hidden;
+}
+
+.menu-div p{
+  padding: 0px 10px 0px 10px;
+  font-size: 14px;
+}
+
+.search-icon-div{
+  justify-content: end;
+}
+
+.search-icon-div img{
+  height: 35px;
+}
+

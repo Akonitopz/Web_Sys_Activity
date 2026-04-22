@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>
+      Cart Quantity
+    </title>
+  </head>
+
+  <body>
+    <h1> Cart Quantity </h1>
+    <button class="Btn1" onclick="
+      console.log(`Cart Quantity: ${quan}`);">
+      Show Quantity
+    </button>
+
+    <button class="Btn2" onclick="
+      quan += 1;
+      console.log(`Cart Quantity: ${quan}`);
+    ">
+      Add to Cart
+    </button>
+
+    <button class="Btn3" onclick="
+      quan += 2;
+      console.log(`Cart Quantity: ${quan}`);
+    ">
+      +2
+    </button>
+
+    <button class="Btn4" onclick="
+      quan += 3;
+      console.log(`Cart Quantity: ${quan}`);
+    ">
+      +3
+    </button>
+
+    <button class="Btn5" onclick="
+      quan = 0;
+      console.log('Cart Reset!')
+      console.log(`Cart Quantity: ${quan}`);
+    ">
+      Reset Cart
+    </button>
+    <script>
+      let quan = 0;
+    </script>
+
+  </body>
+</html>

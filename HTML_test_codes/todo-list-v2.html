@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TO-Do-list</title>
+
+    <style>
+      body{
+        font-family: Arial;
+        margin-bottom: 20px;
+        background-color: black;
+        color: white;
+      }
+      .todo-grid, .body-div{
+        display: grid;
+        grid-template-columns: 200px 200px 110px;
+        column-gap: 20px;
+        row-gap: 20px;
+      }
+      .style-html{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 75vh;
+      }
+      .style-button{
+        border: none;
+        background-color: red;
+        color: white;
+        padding: 15px 20px;
+        font-weight: bold;
+      }
+      .style-data{
+        font-size: 20px;
+      }
+      .style-Add-Button{
+        border: none;
+        background-color: green;
+        color: white;
+        padding: 15px 20px;
+        font-weight: bold;
+      }
+      .style-inputBox{
+        border: none;
+        font-size: 17px;
+        padding-top: 10px;
+        padding-right: 15px;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <div class="style-html">
+      <div>
+        <h2>To-Do-list</h2>
+        <div class="body-div">
+        <input type="text" class="inputName style-inputBox" placeholder="Add tasks here:">
+
+        <input type="date" class="inputDate style-inputBox">
+
+        <button onclick="addData();" class="style-Add-Button">Add</button>
+
+        <div class="output-div todo-grid"></div>
+        </div>
+      </div>
+    </div> 
+
+    <script>
+      todoData = JSON.parse(localStorage.getItem('todoData')) || [{
+        name: '',
+        date: ''
+      }];
+
+      renderArr();
+
+      function addData(){
+        let inputName = document.querySelector('.inputName').value;
+        let inputDate = document.querySelector('.inputDate').value;
+
+        todoData.push({
+          name: inputName,
+          date: inputDate
+        });
+          renderArr();
+        inputName = document.querySelector('.inputName').value = '';
+        inputDate = document.querySelector('.inputDate').value = '';
+      }
+
+      function renderArr(){
+        let inputHTML = '';
+        for(let i = 0; i < todoData.length; i++){
+            const todoName = todoData[i];
+            const html = `
+              <div class="style-data">
+               ${todoName.name} 
+              </div>
+              <div class="style-data">
+                ${todoName.date}
+              </div>
+              <button onclick="
+              todoData.splice(${i}, 1);
+              renderArr();
+              " class="style-button">DELETE
+              </button>
+                `;
+            
+              inputHTML += html;
+        }
+        document.querySelector('.output-div').innerHTML = inputHTML;
+
+        localStorage.setItem('todoData', JSON.stringify(todoData));
+      }
+      //pang debugg
+      console.log('Type of todo:', typeof todoData);
+      console.log('Is todo an array:', Array.isArray(todoData));
+      console.log('Current value of todo:', todoData);
+      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>DOM Projects</title>
+
+    <style>
+      body{
+        font-family: sans-serif;
+      }
+      .style-button {
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        margin-bottom: 30px;
+      }
+      .updated-button{
+        background-color: rgb(240, 240, 240);
+        color: black;
+      }
+      .style-input{
+        padding: 10px;
+        font-size: 15px;
+      }
+      .style-calculate{
+        background-color: green;
+        color: white;
+        padding: 12px 15px;
+        border: none;
+        font-size: 15px;
+        cursor: pointer;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <p>Subscribe to my youtube channel!</p>
+
+    <button onclick="subButton();" 
+    class="js-sub-button style-button"
+    >Subscribe</button>
+
+    <p>Amazon Shipping Calculator</p>
+
+    <p>Orders under $40 = +$10 Shipping Fee.</p>
+
+    <p>Orders over $40 = FREE Shipping.</p>
+
+    <input placeholder="Cost of order" class="user-input style-input" onkeydown="
+    enterFeature(event);
+    "> 
+
+    <button onclick="
+    Calculation();
+    " class="js-calculate style-calculate">Calculate</button>
+
+    <p class="js-total"></p>
+
+    
+
+    <script>
+      function subButton(){
+        let buttonElement = document.querySelector('.js-sub-button');
+
+        if (buttonElement.innerHTML === 'Subscribe'){
+          buttonElement.innerHTML = 'Subscribed!';
+          buttonElement.classList.add('updated-button');
+        }
+        else{
+          buttonElement.innerHTML = 'Subscribe';
+          buttonElement.classList.remove('updated-button');
+        }
+      }
+
+      function Calculation(){
+        let userinput = Number(document.querySelector('.user-input').value);
+        let output = document.querySelector('.js-total');
+
+        if(userinput < 40){
+          userinput += 10;
+          output.innerHTML = `Total Cost: $${userinput}`;
+        }
+        else{
+          output.innerHTML = `Total Cost: $${userinput}`;
+        }}
+      
+      function enterFeature(event){
+          if(event.key === 'Enter'){
+          Calculation();
+        }}
+
+    </script>
+
+  </body>
+</html>
