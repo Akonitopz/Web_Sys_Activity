@@ -2,7 +2,7 @@
     <div class="p-6">
         <h1 class="text-2xl font-bold mb-4">Edit Employee</h1>
 
-        <form action="{{ route('employees.update', $employee->id) }}" method="POST">
+        <form action="{{ route('employees.update', $employee->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -17,6 +17,12 @@
                 <option value="Active" {{ $employee->status == 'Active' ? 'selected' : '' }}>Active</option>
                 <option value="Inactive" {{ $employee->status == 'Inactive' ? 'selected' : '' }}>Inactive</option>
             </select>
+
+            @if($employee->photo)
+                <img src="{{ asset('storage/' . $employee->photo) }}" width="80" class="mb-3 rounded">
+            @endif
+
+            <input type="file" name="photo" class="border p-2 w-full mb-3">
 
             <button class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
             <a href="{{ route('employees.index') }}" class="ml-2">Cancel</a>

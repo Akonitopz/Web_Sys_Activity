@@ -2,10 +2,12 @@
     <div class="p-6">
         <h1 class="text-2xl font-bold mb-4">Payroll Records</h1>
 
-        <a href="{{ route('payrolls.create') }}"
-           class="bg-blue-500 text-white px-4 py-2 rounded">
-            Process Payroll
-        </a>
+        @if(auth()->user()->role === 'admin')
+            <a href="{{ route('payrolls.create') }}"
+               class="bg-blue-500 text-white px-4 py-2 rounded">
+                Process Payroll
+            </a>
+        @endif
 
         @if(session('success'))
             <div class="bg-green-200 p-3 mt-4 rounded">
@@ -23,6 +25,7 @@
                     <th class="border p-2">Allowance</th>
                     <th class="border p-2">Deduction</th>
                     <th class="border p-2">Net Salary</th>
+                    <th class="border p-2">Payslip</th>
                 </tr>
             </thead>
 
@@ -35,10 +38,20 @@
                         </td>
                         <td class="border p-2">{{ $payroll->month }}</td>
                         <td class="border p-2">{{ $payroll->year }}</td>
-                        <td class="border p-2">{{ $payroll->basic_salary }}</td>
-                        <td class="border p-2">{{ $payroll->allowance }}</td>
-                        <td class="border p-2">{{ $payroll->deduction }}</td>
-                        <td class="border p-2 font-bold">{{ $payroll->net_salary }}</td>
+                        <td class="border p-2">₱{{ number_format($payroll->basic_salary, 2) }}</td>
+                        <td class="border p-2">₱{{ number_format($payroll->allowance, 2) }}</td>
+                        <td class="border p-2">₱{{ number_format($payroll->deduction, 2) }}</td>
+                        <td class="border p-2 font-bold">₱{{ number_format($payroll->net_salary, 2) }}</td>
+                        <td class="border p-2">
+                            @if(auth()->user()->role === 'admin')
+                                <a href="{{ route('payrolls.payslip', $payroll->id) }}"
+                                   class="bg-purple-500 text-white px-2 py-1 rounded">
+                                    Download
+                                </a>
+                            @else
+                                Restricted
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

@@ -12,13 +12,14 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
+        $perPage = $request->per_page ?? 5;
 
         $employees = Employee::when($search, function ($query, $search) {
             return $query->where('employee_id', 'like', "%{$search}%")
                 ->orWhere('first_name', 'like', "%{$search}%")
                 ->orWhere('last_name', 'like', "%{$search}%")
                 ->orWhere('department', 'like', "%{$search}%");
-        })->get();
+        })->paginate($perPage)->appends($request->query());
 
         return view('employees.index', compact('employees'));
     }
@@ -37,9 +38,16 @@ class EmployeeController extends Controller
             'email' => 'required|email|unique:employees',
             'department' => 'required',
             'salary' => 'required|numeric',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        Employee::create($request->all());
+        $data = $request->all();
+
+        if ($request->hasFile('photo')) {
+            $data['photo'] = $request->file('photo')->store('employees', 'public');
+        }
+
+        Employee::create($data);
 
         AuditLog::create([
             'user_id' => Auth::id(),
@@ -66,9 +74,16 @@ class EmployeeController extends Controller
             'email' => 'required|email|unique:employees,email,' . $employee->id,
             'department' => 'required',
             'salary' => 'required|numeric',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $employee->update($request->all());
+        $data = $request->all();
+
+        if ($request->hasFile('photo')) {
+            $data['photo'] = $request->file('photo')->store('employees', 'public');
+        }
+
+        $employee->update($data);
 
         return redirect()->route('employees.index')
             ->with('success', 'Employee updated successfully.');
