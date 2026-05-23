@@ -12,14 +12,16 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
-        $perPage = $request->per_page ?? 5;
+        $perPage = $request->per_page ?? 15;
 
         $employees = Employee::when($search, function ($query, $search) {
             return $query->where('employee_id', 'like', "%{$search}%")
                 ->orWhere('first_name', 'like', "%{$search}%")
                 ->orWhere('last_name', 'like', "%{$search}%")
                 ->orWhere('department', 'like', "%{$search}%");
-        })->paginate($perPage)->appends($request->query());
+        })
+        ->paginate($perPage)
+        ->appends($request->query());
 
         return view('employees.index', compact('employees'));
     }

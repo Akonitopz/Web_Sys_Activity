@@ -46,29 +46,7 @@
             </div>
         </div>
 
-        <div class="mt-6">
-            <a href="{{ route('employees.index') }}"
-               class="bg-blue-500 text-white px-4 py-2 rounded">
-                Manage Employees
-            </a>
-
-            <a href="{{ route('payrolls.index') }}"
-               class="bg-green-500 text-white px-4 py-2 rounded ml-2">
-                Manage Payroll
-            </a>
-
-            <a href="{{ route('payroll.history') }}"
-               class="bg-purple-500 text-white px-4 py-2 rounded ml-2">
-                Payroll History
-            </a>
-
-            @if(auth()->user()->role === 'admin')
-                <a href="{{ route('audit.logs') }}"
-                   class="bg-gray-700 text-white px-4 py-2 rounded ml-2">
-                    Audit Logs
-                </a>
-            @endif
-        </div>
+ 
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
