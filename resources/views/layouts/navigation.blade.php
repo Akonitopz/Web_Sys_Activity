@@ -39,8 +39,22 @@
     <div class="relative" x-data="{ open: false }">
         <button @click="open = !open"
                 class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 focus:outline-none">
-            <span>{{ Auth::user()->name }}</span>
-            <span>⌄</span>
+            
+                <div class="flex items-center gap-3">
+    
+                    @if(Auth::user()->profile_photo)
+                        <img src="{{ asset('storage/' . Auth::user()->profile_photo) }}"
+                            class="w-10 h-10 rounded-full object-cover border shadow">
+                    @else
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center border">
+                            👤
+                        </div>
+                    @endif
+
+                    <span>{{ Auth::user()->name }}</span>
+                </div>
+
+            <span>⏷</span>
         </button>
 
         <div x-show="open"
