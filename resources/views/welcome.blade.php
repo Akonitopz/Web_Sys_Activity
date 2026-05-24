@@ -14,7 +14,7 @@
         <div class="bg-white/25 backdrop-blur-sm p-10 rounded shadow w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-10">
 
             <div class="flex flex-col justify-center text-center">
-                <h1 class="text-3xl font-bold mb-4">
+                <h1 class="text-3xl text-white font-bold mb-6">
                     Payroll Management System
                 </h1>
 
