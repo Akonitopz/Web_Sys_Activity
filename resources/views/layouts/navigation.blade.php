@@ -1,6 +1,8 @@
 <aside class="group fixed left-0 top-0 z-50 w-20 hover:w-64 bg-gray-900 text-white min-h-screen p-4 transition-all duration-300 overflow-hidden">
     <div class="mb-8">
-        <div class="text-2xl font-bold">PS</div>
+        
+       <img src="{{ asset('images/logo.svg') }}" alt="Payroll Logo" class="w-20 h-20">
+
         <div class="hidden group-hover:block text-lg font-bold mt-2">
             Payroll System
         </div>
