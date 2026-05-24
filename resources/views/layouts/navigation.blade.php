@@ -4,55 +4,79 @@
         <div class="hidden group-hover:block text-lg font-bold mt-2">
             Payroll System
         </div>
+
+        <div class="hidden group-hover:block text-xs text-gray-400 mt-1 capitalize">
+            {{ Auth::user()->role }} Access
+        </div>
     </div>
 
-    <nav class="space-y-3">
-        <a href="{{ route('dashboard') }}" class="block px-4 py-2 rounded hover:bg-gray-700">
-            🏠 <span class="hidden group-hover:inline ml-3">Dashboard</span>
-        </a>
 
-        <a href="{{ route('employees.index') }}" class="block px-4 py-2 rounded hover:bg-gray-700">
-            👥 <span class="hidden group-hover:inline ml-3">Employees</span>
-        </a>
+        <nav class="space-y-3">
+            @if(auth()->user()->role === 'admin')
+                <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 rounded hover:bg-gray-700">
+                    🏠 <span class="hidden group-hover:inline ml-3">Dashboard</span>
+                </a>
 
-        <a href="{{ route('payrolls.index') }}" class="block px-4 py-2 rounded hover:bg-gray-700">
-            💰 <span class="hidden group-hover:inline ml-3">Payroll</span>
-        </a>
+                <a href="{{ route('employees.index') }}" class="block px-4 py-2 rounded hover:bg-gray-700">
+                    👥 <span class="hidden group-hover:inline ml-3">Employees</span>
+                </a>
 
-        <a href="{{ route('payroll.history') }}" class="block px-4 py-2 rounded hover:bg-gray-700">
-            📄 <span class="hidden group-hover:inline ml-3">Payroll History</span>
-        </a>
+                <a href="{{ route('payrolls.index') }}" class="block px-4 py-2 rounded hover:bg-gray-700">
+                    💰 <span class="hidden group-hover:inline ml-3">Payroll</span>
+                </a>
 
-        <a href="{{ route('attendances.index') }}" class="block px-4 py-2 rounded hover:bg-gray-700">
-            🕒 <span class="hidden group-hover:inline ml-3">Attendance</span>
-        </a>
+                <a href="{{ route('payroll.history') }}" class="block px-4 py-2 rounded hover:bg-gray-700">
+                    📄 <span class="hidden group-hover:inline ml-3">Payroll History</span>
+                </a>
 
-        @if(auth()->user()->role === 'admin')
-            <a href="{{ route('audit.logs') }}" class="block px-4 py-2 rounded hover:bg-gray-700">
-                🛡️ <span class="hidden group-hover:inline ml-3">Audit Logs</span>
-            </a>
-        @endif
-    </nav>
+                <a href="{{ route('attendances.index') }}" class="block px-4 py-2 rounded hover:bg-gray-700">
+                    🕒 <span class="hidden group-hover:inline ml-3">Attendance</span>
+                </a>
+
+                <a href="{{ route('audit.logs') }}" class="block px-4 py-2 rounded hover:bg-gray-700">
+                    🛡️ <span class="hidden group-hover:inline ml-3">Audit Logs</span>
+                </a>
+            @else
+                <a href="{{ route('staff.dashboard') }}" class="block px-4 py-2 rounded hover:bg-gray-700">
+                    🏠 <span class="hidden group-hover:inline ml-3">Dashboard</span>
+                </a>
+
+                <a href="{{ route('payrolls.index') }}" class="block px-4 py-2 rounded hover:bg-gray-700">
+                    💰 <span class="hidden group-hover:inline ml-3">My Payroll</span>
+                </a>
+
+                <a href="{{ route('payroll.history') }}" class="block px-4 py-2 rounded hover:bg-gray-700">
+                    📄 <span class="hidden group-hover:inline ml-3">Payroll History</span>
+                </a>
+
+                <a href="{{ route('attendances.index') }}" class="block px-4 py-2 rounded hover:bg-gray-700">
+                    🕒 <span class="hidden group-hover:inline ml-3">Attendance</span>
+                </a>
+            @endif
+        </nav>
+
 </aside>
 
 <header class="fixed top-0 left-20 right-0 z-40 bg-white shadow px-6 py-4 flex justify-end items-center">
     <div class="relative" x-data="{ open: false }">
         <button @click="open = !open"
                 class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 focus:outline-none">
-            
-                <div class="flex items-center gap-3">
-    
-                    @if(Auth::user()->profile_photo)
-                        <img src="{{ asset('storage/' . Auth::user()->profile_photo) }}"
-                            class="w-10 h-10 rounded-full object-cover border shadow">
-                    @else
-                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center border">
-                            👤
-                        </div>
-                    @endif
 
-                    <span>{{ Auth::user()->name }}</span>
+            <div class="flex items-center gap-3">
+                @if(Auth::user()->profile_photo)
+                    <img src="{{ asset('storage/' . Auth::user()->profile_photo) }}"
+                         class="w-10 h-10 rounded-full object-cover border shadow">
+                @else
+                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center border">
+                        👤
+                    </div>
+                @endif
+
+                <div class="text-left">
+                    <div class="font-medium">{{ Auth::user()->name }}</div>
+                    <div class="text-xs text-gray-500 capitalize">{{ Auth::user()->role }}</div>
                 </div>
+            </div>
 
             <span>⏷</span>
         </button>

@@ -43,14 +43,12 @@
                         <td class="border p-2">₱{{ number_format($payroll->deduction, 2) }}</td>
                         <td class="border p-2 font-bold">₱{{ number_format($payroll->net_salary, 2) }}</td>
                         <td class="border p-2">
-                            @if(auth()->user()->role === 'admin')
+                            
                                 <a href="{{ route('payrolls.payslip', $payroll->id) }}"
                                    class="bg-purple-500 text-white px-2 py-1 rounded">
                                     Download
                                 </a>
-                            @else
-                                Restricted
-                            @endif
+   
                         </td>
                     </tr>
                 @endforeach

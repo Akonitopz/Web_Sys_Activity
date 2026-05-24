@@ -8,6 +8,7 @@ use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\PayslipController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StaffDashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,14 +17,26 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])
-        ->name('dashboard');
+    Route::get('/dashboard', function () {
+        if (auth()->user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
 
-    Route::get('/employees', [EmployeeController::class, 'index'])
-        ->name('employees.index');
+        return redirect()->route('staff.dashboard');
+    })->name('dashboard');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/staff/dashboard', [StaffDashboardController::class, 'index'])
+        ->name('staff.dashboard');
 
     Route::get('/payrolls', [PayrollController::class, 'index'])
         ->name('payrolls.index');
+
+    Route::get('/payrolls/{payroll}/payslip', [PayslipController::class, 'show'])
+    ->name('payrolls.payslip');
 
     Route::get('/payroll-history', [PayrollHistoryController::class, 'index'])
         ->name('payroll.history');
@@ -31,16 +44,13 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('attendances', AttendanceController::class)
         ->only(['index', 'create', 'store']);
 
-    Route::get('/profile', [ProfileController::class, 'edit'])
-        ->name('profile.edit');
-
-    Route::patch('/profile', [ProfileController::class, 'update'])
-        ->name('profile.update');
-
-    Route::delete('/profile', [ProfileController::class, 'destroy'])
-        ->name('profile.destroy');
-
     Route::middleware(['admin'])->group(function () {
+
+        Route::get('/admin/dashboard', [DashboardController::class, 'index'])
+            ->name('admin.dashboard');
+
+        Route::get('/employees', [EmployeeController::class, 'index'])
+            ->name('employees.index');
 
         Route::get('/employees/create', [EmployeeController::class, 'create'])
             ->name('employees.create');
@@ -63,8 +73,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/payrolls', [PayrollController::class, 'store'])
             ->name('payrolls.store');
 
-        Route::get('/payrolls/{payroll}/payslip', [PayslipController::class, 'show'])
-            ->name('payrolls.payslip');
 
         Route::get('/audit-logs', [AuditLogController::class, 'index'])
             ->name('audit.logs');
