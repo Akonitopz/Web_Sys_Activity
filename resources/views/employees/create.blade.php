@@ -19,8 +19,13 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Employee ID</label>
                         <input name="employee_id"
-                               placeholder="EMP001"
-                               class="border-gray-300 rounded-md shadow-sm w-full">
+                            value="{{ old('employee_id') }}"
+                            placeholder="EMP001"
+                            class="border-gray-300 rounded-md shadow-sm w-full @error('employee_id') border-red-500 @enderror">
+
+                        @error('employee_id')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>

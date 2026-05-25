@@ -34,13 +34,16 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'employee_id' => 'required|unique:employees',
+            'employee_id' => 'required|unique:employees,employee_id',
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email|unique:employees',
+            'email' => 'required|email|unique:employees,email',
             'department' => 'required',
             'salary' => 'required|numeric',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ], [
+            'employee_id.unique' => 'This Employee ID already exists.',
+            'email.unique' => 'This email already exists.',
         ]);
 
         $data = $request->all();
