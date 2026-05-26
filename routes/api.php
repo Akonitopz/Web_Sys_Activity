@@ -31,4 +31,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/audit-logs', [AuditLogApiController::class, 'index']);
 
+    Route::post('/employees', [EmployeeApiController::class, 'store']);
+
 });

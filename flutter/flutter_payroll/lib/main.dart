@@ -765,6 +765,22 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
                 ],
               ),
             ),
+            
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            final result = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const AddEmployeeScreen(),
+              ),
+            );
+
+            if (result == true) {
+              fetchEmployees();
+            }
+          },
+          child: const Icon(Icons.add),
+        ),
     );
   }
 }
@@ -1348,6 +1364,149 @@ class _AuditLogListScreenState extends State<AuditLogListScreen> {
                 ],
               ),
             ),
+    );
+  }
+}
+
+
+class AddEmployeeScreen extends StatefulWidget {
+  const AddEmployeeScreen({super.key});
+
+  @override
+  State<AddEmployeeScreen> createState() => _AddEmployeeScreenState();
+}
+
+class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
+  final employeeIdController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final departmentController = TextEditingController();
+  final salaryController = TextEditingController();
+
+  bool isLoading = false;
+
+  Future<void> saveEmployee() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('auth_token');
+
+    final response = await http.post(
+      Uri.parse('$apiBaseUrl/employees'),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode({
+        'employee_id': employeeIdController.text,
+        'first_name': firstNameController.text,
+        'last_name': lastNameController.text,
+        'email': emailController.text,
+        'department': departmentController.text,
+        'salary': salaryController.text,
+        'status': 'Active',
+      }),
+    );
+
+    setState(() {
+      isLoading = false;
+    });
+
+    if (response.statusCode == 201) {
+      if (!context.mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Employee added successfully'),
+        ),
+      );
+
+      Navigator.pop(context, true);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to add employee'),
+        ),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Add Employee'),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          TextField(
+            controller: employeeIdController,
+            decoration: const InputDecoration(
+              labelText: 'Employee ID',
+            ),
+          ),
+
+          const SizedBox(height: 16),
+
+          TextField(
+            controller: firstNameController,
+            decoration: const InputDecoration(
+              labelText: 'First Name',
+            ),
+          ),
+
+          const SizedBox(height: 16),
+
+          TextField(
+            controller: lastNameController,
+            decoration: const InputDecoration(
+              labelText: 'Last Name',
+            ),
+          ),
+
+          const SizedBox(height: 16),
+
+          TextField(
+            controller: emailController,
+            decoration: const InputDecoration(
+              labelText: 'Email',
+            ),
+          ),
+
+          const SizedBox(height: 16),
+
+          TextField(
+            controller: departmentController,
+            decoration: const InputDecoration(
+              labelText: 'Department',
+            ),
+          ),
+
+          const SizedBox(height: 16),
+
+          TextField(
+            controller: salaryController,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              labelText: 'Salary',
+            ),
+          ),
+
+          const SizedBox(height: 24),
+
+          ElevatedButton(
+            onPressed: isLoading ? null : saveEmployee,
+            child: Text(
+              isLoading ? 'Saving...' : 'Save Employee',
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
